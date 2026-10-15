@@ -48,4 +48,4 @@ jobs:
         run: pwsh ui-playwright/bin/Debug/net8.0/playwright.ps1 install --with-deps chromium
 
       - name: Run UI tests
-        run: dotnet test ui-playwright/UiPlaywight.Tests.csproj --configuration Release
+        run: dotnet test ui-playwright/UiPlaywright.Tests.csproj --configuration Release
