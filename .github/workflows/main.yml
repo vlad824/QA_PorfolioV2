@@ -1,0 +1,51 @@
+
+name: QA Automation Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  api-tests:
+    name: API Tests - RestSharp
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore API dependencies
+        run: dotnet restore api-restsharp/ApiRestSharp.Tests.csproj
+
+      - name: Run API tests
+        run: dotnet test api-restsharp/ApiRestSharp.Tests.csproj --configuration Release
+
+  ui-tests:
+    name: UI Tests - Playwright
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install Playwright browsers
+        run: dotnet build ui-playwright/UiPlaywight.Tests.csproj
+
+      - name: Install Chromium
+        run: pwsh ui-playwright/bin/Debug/net8.0/playwright.ps1 install --with-deps chromium
+
+      - name: Run UI tests
+        run: dotnet test ui-playwright/UiPlaywight.Tests.csproj --configuration Release
