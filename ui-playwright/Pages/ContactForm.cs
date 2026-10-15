@@ -11,7 +11,7 @@ public sealed class ContactForm(IPage page)
     private ILocator PhoneInput => page.GetByTestId("ContactPhone");
     private ILocator SubjectInput => page.GetByTestId("ContactSubject");
     private ILocator MessageInput => page.GetByTestId("ContactDescription");
-    private ILocator SubmitButton => page.Locator("#submitContact");
+    private ILocator SubmitButton => page.GetByRole(AriaRole.Button, new() { Name = "Submit", Exact = true });
 
     private const string ThanksText = "Thanks for getting in touch";
 
