@@ -42,7 +42,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Install Playwright browsers
-        run: dotnet build ui-playwright/UiPlaywight.Tests.csproj
+        run: dotnet build ui-playwright/UiPlaywright.Tests.csproj
 
       - name: Install Chromium
         run: pwsh ui-playwright/bin/Debug/net8.0/playwright.ps1 install --with-deps chromium
